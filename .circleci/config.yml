@@ -6,4 +6,4 @@ jobs:
       - checkout
       - run:
           name: docker-compose up
-          command: docker-compose up
+          command: docker-compose up -d
