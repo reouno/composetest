@@ -4,17 +4,18 @@ orbs:
   aws-cli: circleci/aws-cli@0.1.16
 
 jobs:
-  aws-cli-example:
-    executor: aws-cli/default
+  build:
+    machine: true
     steps:
       - checkout
-      - aws-cli/setup:
-          profile-name: example
-      - run: echo "Run your code here"
+      - aws-cli/setup
+      - run:
+          name: docker-compose up
+          command: docker-compose up -d
 
 workflows:
   version: 2
-  aws-cli:
+  build-deploy:
     jobs:
-      - aws-cli-example:
+      - build:
           context: aws
