@@ -6,6 +6,19 @@ commands:
     steps:
       - run: git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
       - run: python aws-elastic-beanstalk-cli-setup/scripts/ebcli_installer.py
+  configure-awsebcli:
+    description: configure aws authentications
+    steps:
+      - run:
+          name: Create AWS credentials manually
+          command: |
+            mkdir ~/.aws
+            touch ~/.aws/config
+            chmod 600 ~/.aws/config
+            echo "[profile eb-cli]" > ~/.aws/config
+            echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
+            echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+            echo "region=$AWS_DEFAULT_REGION" >> ~/.aws/config
   docker-compose-up:
     description: build application
     steps:
