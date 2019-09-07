@@ -1,14 +1,15 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@0.1.16
+  awsebcli: sbc-orbs/awsebcli@0.0.3
 
 jobs:
   build:
     machine: true
     steps:
       - checkout
-      - aws-cli/setup
+      - awsebcli/install
+      - awsebcli/configure
       - run:
           name: docker-compose up
           command: docker-compose up -d
