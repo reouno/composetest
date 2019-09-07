@@ -1,9 +1,13 @@
-version: 2
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.16
 jobs:
   build:
     machine: true
     steps:
       - checkout
+      - aws-cli/install
+      - aws-cli/setup
       - run:
           name: docker-compose up
           command: docker-compose up -d
