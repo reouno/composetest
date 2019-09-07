@@ -6,15 +6,20 @@ commands:
     steps:
       - run: git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
       - run: ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
+  docker-compose-up:
+    description: build application
+    steps:
+      - run:
+          name: docker-compose up
+          command: docker-compose up -d
 
 jobs:
   build:
     machine: true
     steps:
       - checkout
-      - run:
-          name: docker-compose up
-          command: docker-compose up -d
+      - install-awsebcli
+      - docker-compose-up
 
 workflows:
   version: 2
