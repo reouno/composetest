@@ -4,11 +4,8 @@ commands:
   install-awsebcli:
     description: install awsebcli
     steps:
-      - run: sudo /opt/circleci/.pyenv/plugins/python-build/install.sh
-      - run: git clone git://github.com/yyuu/pyenv-update.git /opt/circleci/.pyenv/plugins/pyenv-update
-      - run: pyenv update
       - run: git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
-      - run: ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
+      - run: python aws-elastic-beanstalk-cli-setup/scripts/ebcli_installer.py
   docker-compose-up:
     description: build application
     steps:
