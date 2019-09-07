@@ -1,15 +1,17 @@
 version: 2.1
 
-orbs:
-  awsebcli: sbc-orbs/awsebcli@0.0.3
+commands:
+  install-awsebcli:
+    description: install awsebcli
+    steps:
+      - run: git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
+      - run: ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
 
 jobs:
   build:
     machine: true
     steps:
       - checkout
-      - awsebcli/install
-      - awsebcli/configure
       - run:
           name: docker-compose up
           command: docker-compose up -d
